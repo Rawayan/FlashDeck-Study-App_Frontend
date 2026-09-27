@@ -22,7 +22,7 @@ function CardRow({ card, onDelete }) {
           Edit
         </Link>
 
-        <button onClick={() => onDelete(card)}>
+        <button onClick={onDelete}>
           Delete
         </button>
       </div>
