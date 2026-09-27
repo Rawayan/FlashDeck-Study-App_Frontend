@@ -6,9 +6,11 @@ import DeckCard from "../components/DeckCard";
 import Loader from "../components/Loader";
 import EmptyState from "../components/EmptyState";
 import ErrorState from "../components/ErrorState";
+import ConfirmModal from "../components/ConfirmModal";
 
 function DeckList() {
   const [decks, setDecks] = useState([]);
+  const [deleteTarget, setDeleteTarget] = useState(null);
 
   const [search, setSearch] = useState("");
   const [subject, setSubject] = useState("");
@@ -17,6 +19,7 @@ function DeckList() {
   const [page, setPage] = useState(1);
 
   const [loading, setLoading] = useState(true);
+  const [deleteLoading, setDeleteLoading] = useState(false);
   const [error, setError] = useState("");
 
   const [nextPage, setNextPage] = useState(null);
@@ -66,17 +69,16 @@ function DeckList() {
     setPage(1);
   };
 
-  const handleDelete = async (deck) => {
-    const confirmed = window.confirm(
-      `Delete "${deck.title}"? All cards in this deck will also be deleted.`
-    );
-
-    if (!confirmed) {
-      return;
-    }
+  const handleDelete = async () => {
+    if (!deleteTarget) return;
 
     try {
-      await deleteDeck(deck.id);
+      setDeleteLoading(true);
+      setError("");
+
+      await deleteDeck(deleteTarget.id);
+
+      setDeleteTarget(null);
 
       if (decks.length === 1 && page > 1) {
         setPage((currentPage) => currentPage - 1);
@@ -88,11 +90,14 @@ function DeckList() {
         err.response?.data?.detail ||
           "Failed to delete deck."
       );
+    } finally {
+      setDeleteLoading(false);
     }
   };
 
   return (
     <div className="page-container">
+
       <div className="deck-list-header">
         <div>
           <h1>Your Decks</h1>
@@ -108,6 +113,7 @@ function DeckList() {
       </div>
 
       <div className="deck-filters">
+
         <input
           type="text"
           placeholder="Search decks..."
@@ -149,6 +155,7 @@ function DeckList() {
             Archived
           </option>
         </select>
+
       </div>
 
       {loading && <Loader />}
@@ -164,16 +171,19 @@ function DeckList() {
       {!loading && !error && decks.length > 0 && (
         <>
           <div className="deck-list">
+
             {decks.map((deck) => (
               <DeckCard
                 key={deck.id}
                 deck={deck}
-                onDelete={handleDelete}
+                onDelete={() => setDeleteTarget(deck)}
               />
             ))}
+
           </div>
 
           <div className="pagination">
+
             <button
               disabled={!previousPage}
               onClick={() =>
@@ -197,9 +207,24 @@ function DeckList() {
             >
               Next
             </button>
+
           </div>
         </>
       )}
+
+      <ConfirmModal
+        open={!!deleteTarget}
+        title="Delete Deck?"
+        message={
+          deleteTarget
+            ? `Deleting "${deleteTarget.title}" will also delete all cards in this deck.`
+            : ""
+        }
+        onCancel={() => setDeleteTarget(null)}
+        onConfirm={handleDelete}
+        loading={deleteLoading}
+      />
+
     </div>
   );
 }
