@@ -6,15 +6,7 @@ import Navbar from "./components/Navbar";
 
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-
-function DashboardPlaceholder() {
-  return (
-    <div className="page-container">
-      <h1>Dashboard</h1>
-      <p>Welcome to FlashDeck.</p>
-    </div>
-  );
-}
+import Dashboard from "./pages/Dashboard";
 
 function App() {
   return (
@@ -37,7 +29,7 @@ function App() {
             <Route element={<ProtectedRoute />}>
               <Route
                 path="/"
-                element={<DashboardPlaceholder />}
+                element={<Dashboard />}
               />
             </Route>
           </Routes>
