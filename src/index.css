@@ -5,5 +5,183 @@
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  background: #f8f9fa;
+  background: #f5f7fa;
+  color: #222;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+.navbar {
+  background: #212529;
+  color: white;
+}
+
+.navbar-inner {
+  max-width: 1200px;
+  margin: auto;
+  padding: 15px 20px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.brand {
+  color: white;
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.nav-links a {
+  color: white;
+}
+
+.nav-links button {
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+}
+
+.username {
+  color: #ddd;
+}
+
+main {
+  min-height: calc(100vh - 60px);
+}
+
+.page-container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 30px 20px;
+}
+
+.loader,
+.empty-state,
+.error-state {
+  padding: 30px;
+  text-align: center;
+}
+
+.error-state {
+  color: #b00020;
+}
+
+.stat-card {
+  padding: 20px;
+  background: white;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+}
+
+.stat-title {
+  margin: 0;
+  color: #666;
+}
+
+.stat-card h3 {
+  margin-bottom: 0;
+}
+
+.deck-card,
+.card-row {
+  background: white;
+  padding: 20px;
+  margin-bottom: 15px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+}
+
+.deck-stats {
+  display: flex;
+  gap: 20px;
+  margin-top: 15px;
+}
+
+.deck-actions,
+.card-actions,
+.modal-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.box-badge {
+  display: inline-block;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-weight: bold;
+  margin: 8px 0;
+}
+
+.box-1 {
+  background: #ffe0e0;
+}
+
+.box-2 {
+  background: #fff0cc;
+}
+
+.box-3 {
+  background: #fff8b3;
+}
+
+.box-4 {
+  background: #dff5df;
+}
+
+.box-5 {
+  background: #d9ecff;
+}
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.confirm-modal {
+  width: min(90%, 450px);
+  background: white;
+  padding: 25px;
+  border-radius: 10px;
+}
+
+@media (max-width: 600px) {
+  .navbar-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .nav-links {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .page-container {
+    padding: 20px 15px;
+  }
+
+  .deck-actions,
+  .card-actions {
+    flex-wrap: wrap;
+  }
 }
