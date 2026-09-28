@@ -8,6 +8,7 @@ import DeckList from "./pages/DeckList";
 import DeckDetail from "./pages/DeckDetail";
 import DeckForm from "./pages/DeckForm";
 import CardForm from "./pages/CardForm";
+import Study from "./pages/Study";
 
 import Login from "./pages/Login";
 import Register from "./pages/Register";
@@ -59,6 +60,11 @@ function App() {
             <Route
               path="/cards/:id/edit"
               element={<CardForm />}
+            />
+
+            <Route
+              path="/decks/:id/study"
+              element={<Study />}
             />
 
             <Route element={<ProtectedRoute />}>
