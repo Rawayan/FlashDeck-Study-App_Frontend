@@ -896,3 +896,248 @@ main {
     width: 100%;
   }
 }
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  min-height: 100%;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Common buttons */
+
+.primary-button,
+.secondary-button {
+  display: inline-block;
+  padding: 10px 16px;
+  border-radius: 6px;
+  text-decoration: none;
+  cursor: pointer;
+  font-weight: 600;
+  border: 1px solid transparent;
+}
+
+.primary-button {
+  background: #222;
+  color: white;
+}
+
+.primary-button:hover {
+  background: #444;
+}
+
+.secondary-button {
+  background: white;
+  color: #222;
+  border-color: #ccc;
+}
+
+.secondary-button:hover {
+  background: #f5f5f5;
+}
+
+/* Card rows */
+
+.card-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 20px;
+  background: white;
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
+}
+
+.card-content {
+  min-width: 0;
+  flex: 1;
+}
+
+.card-content strong {
+  display: block;
+  margin-bottom: 8px;
+  overflow-wrap: anywhere;
+}
+
+.card-content p {
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+.card-content small {
+  display: block;
+  margin-top: 10px;
+  color: #666;
+  overflow-wrap: anywhere;
+}
+
+.card-actions {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.card-actions a,
+.card-actions button {
+  padding: 7px 11px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  background: white;
+  text-decoration: none;
+  color: #222;
+  cursor: pointer;
+}
+
+.card-actions button {
+  color: #b00020;
+}
+
+/* Deck cards */
+
+.deck-card {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 20px;
+  background: white;
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
+}
+
+.deck-card > div:first-child {
+  min-width: 0;
+}
+
+.deck-card h3,
+.deck-card p {
+  overflow-wrap: anywhere;
+}
+
+.deck-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  flex-shrink: 0;
+}
+
+/* Empty and error states */
+
+.empty-state,
+.error-state {
+  padding: 30px;
+  text-align: center;
+  border-radius: 8px;
+  background: white;
+  border: 1px solid #e5e5e5;
+}
+
+.error-state {
+  color: #b00020;
+}
+
+/* Mobile */
+
+@media (max-width: 600px) {
+  .page-container {
+    width: 100%;
+    padding: 15px;
+  }
+
+  .navbar-inner {
+    padding: 12px 15px;
+  }
+
+  .nav-links {
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .deck-card,
+  .card-row {
+    flex-direction: column;
+  }
+
+  .deck-actions,
+  .card-actions {
+    width: 100%;
+  }
+
+  .deck-actions a,
+  .deck-actions button,
+  .card-actions a,
+  .card-actions button {
+    flex: 1;
+    text-align: center;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .box-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 390px) {
+  .page-container {
+    padding: 12px;
+  }
+
+  .stats-grid,
+  .box-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .primary-button,
+  .secondary-button {
+    padding: 9px 12px;
+  }
+
+  .study-card {
+    padding: 16px;
+  }
+
+  .study-question h2 {
+    font-size: 20px;
+  }
+
+  .card-row,
+  .deck-card {
+    padding: 15px;
+  }
+
+  .card-actions,
+  .deck-actions {
+    flex-direction: column;
+  }
+
+  .card-actions a,
+  .card-actions button,
+  .deck-actions a,
+  .deck-actions button {
+    width: 100%;
+  }
+}
