@@ -1,16 +1,114 @@
-# React + Vite
+# FlashDeck Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+FlashDeck is a spaced-repetition study application built with React and Vite.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+* User registration and login
+* JWT authentication
+* Protected routes
+* Dashboard with study statistics
+* Deck management
+* Card management
+* Search and filtering
+* Pagination
+* Spaced-repetition study screen
+* Review with Got it / Missed actions
+* Box 1–5 progress display
+* Delete confirmation modal
+* Responsive design
 
-## React Compiler
+## Technologies
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+* React
+* Vite
+* React Router
+* Axios
+* CSS
 
-## Expanding the ESLint configuration
+## Setup
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Clone the repository and enter the project folder:
+
+
+cd flashdeck-frontend
+
+
+Install dependencies:
+
+
+npm install
+
+
+Create `.env` from `.env.example`:
+
+
+VITE_API_URL=http://127.0.0.1:8000/api
+
+
+Make sure the FlashDeck Django backend is running.
+
+Start the development server:
+
+
+npm run dev
+
+
+The frontend will normally be available at:
+
+http://localhost:5173/
+
+
+## Build
+
+Create a production build:
+
+
+npm run build
+
+
+## Backend
+
+The backend is maintained in a separate repository:
+
+"flashdeck-backend"
+
+
+The frontend communicates with the Django REST API through the configured `VITE_API_URL`.
+
+## Main Pages
+
+/login
+/register
+/
+/decks
+/decks/new
+/decks/:id
+/decks/:id/edit
+/decks/:id/cards/new
+/cards/:id/edit
+/decks/:id/study
+
+
+## Authentication
+
+JWT access and refresh tokens are stored locally by the frontend.
+
+Protected pages require an authenticated user.
+
+## Project Structure
+
+src/
+├── api/
+│   ├── auth.js
+│   ├── cards.js
+│   ├── client.js
+│   └── decks.js
+├── auth/
+│   └── AuthContext.jsx
+├── components/
+├── pages/
+├── App.jsx
+├── main.jsx
+└── index.css
+
