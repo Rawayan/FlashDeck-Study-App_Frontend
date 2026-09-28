@@ -4,25 +4,39 @@ function ConfirmModal({
   message,
   onConfirm,
   onCancel,
+  loading = false,
 }) {
-  if (!open) {
-    return null;
-  }
+  if (!open) return null;
 
   return (
-    <div className="modal-backdrop">
-      <div className="confirm-modal">
+    <div
+      className="modal-backdrop"
+      onClick={onCancel}
+    >
+      <div
+        className="confirm-modal"
+        onClick={(event) => event.stopPropagation()}
+      >
         <h3>{title}</h3>
 
         <p>{message}</p>
 
         <div className="modal-actions">
-          <button onClick={onCancel}>
+          <button
+            type="button"
+            onClick={onCancel}
+            disabled={loading}
+          >
             Cancel
           </button>
 
-          <button onClick={onConfirm}>
-            Delete
+          <button
+            type="button"
+            className="delete-button"
+            onClick={onConfirm}
+            disabled={loading}
+          >
+            {loading ? "Deleting..." : "Delete"}
           </button>
         </div>
       </div>

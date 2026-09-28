@@ -26,6 +26,8 @@ function DeckDetail() {
 
   const [deleteTarget, setDeleteTarget] = useState(null);
 
+  const [deleteLoading, setDeleteLoading] = useState(false);
+
   const loadDeck = async () => {
     try {
       const response = await getDeck(id);
@@ -88,25 +90,30 @@ function DeckDetail() {
   };
 
   const handleDelete = async () => {
-    if (!deleteTarget) return;
+  if (!deleteTarget) return;
 
-    try {
-      await deleteCard(deleteTarget.id);
+  try {
+    setDeleteLoading(true);
+    setError("");
 
-      setDeleteTarget(null);
+    await deleteCard(deleteTarget.id);
 
-      if (cards.length === 1 && page > 1) {
-        setPage((currentPage) => currentPage - 1);
-      } else {
-        loadCards();
-      }
-    } catch (err) {
-      setError(
-        err.response?.data?.detail || "Failed to delete card."
-      );
-      setDeleteTarget(null);
+    setDeleteTarget(null);
+
+    if (cards.length === 1 && page > 1) {
+      setPage((currentPage) => currentPage - 1);
+    } else {
+      loadCards();
     }
-  };
+  } catch (err) {
+    setError(
+      err.response?.data?.detail ||
+        "Failed to delete card."
+    );
+  } finally {
+    setDeleteLoading(false);
+  }
+};
 
   if (loading && !deck) {
     return (
@@ -243,13 +250,10 @@ function DeckDetail() {
       <ConfirmModal
         open={!!deleteTarget}
         title="Delete Card?"
-        message={
-          deleteTarget
-            ? `Are you sure you want to delete this card?`
-            : ""
-        }
+        message="Are you sure you want to delete this card?"
         onCancel={() => setDeleteTarget(null)}
         onConfirm={handleDelete}
+        loading={deleteLoading}
       />
     </div>
   );
