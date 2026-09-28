@@ -30,54 +30,56 @@ FlashDeck is a spaced-repetition study application built with React and Vite.
 
 Clone the repository and enter the project folder:
 
-
+```bash id="a9r5f2"
 cd flashdeck-frontend
-
+```
 
 Install dependencies:
 
-
+```bash id="1q8w6e"
 npm install
-
+```
 
 Create `.env` from `.env.example`:
 
-
+```env id="v7c0t4"
 VITE_API_URL=http://127.0.0.1:8000/api
-
+```
 
 Make sure the FlashDeck Django backend is running.
 
 Start the development server:
 
-
+```bash id="j5tq0n"
 npm run dev
-
+```
 
 The frontend will normally be available at:
 
+```text id="e4k3q1"
 http://localhost:5173/
-
+```
 
 ## Build
 
 Create a production build:
 
-
+```bash id="w1r6hc"
 npm run build
-
+```
 
 ## Backend
 
 The backend is maintained in a separate repository:
 
-"flashdeck-backend"
-
+```text id="flashdeck-backend"
+```
 
 The frontend communicates with the Django REST API through the configured `VITE_API_URL`.
 
 ## Main Pages
 
+```text id="q5d2fz"
 /login
 /register
 /
@@ -88,7 +90,7 @@ The frontend communicates with the Django REST API through the configured `VITE_
 /decks/:id/cards/new
 /cards/:id/edit
 /decks/:id/study
-
+```
 
 ## Authentication
 
@@ -98,6 +100,7 @@ Protected pages require an authenticated user.
 
 ## Project Structure
 
+```text id="u3n7ka"
 src/
 ├── api/
 │   ├── auth.js
@@ -111,4 +114,4 @@ src/
 ├── App.jsx
 ├── main.jsx
 └── index.css
-
+```
