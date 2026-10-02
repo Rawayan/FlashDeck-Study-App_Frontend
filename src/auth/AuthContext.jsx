@@ -1,43 +1,49 @@
-import { createContext, useContext, useEffect, useState } from "react";
-import { loginUser } from "../api/auth";
+import { createContext, useContext, useState } from "react";
 
-const AuthContext = createContext();
+const AuthContext = createContext(null);
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(() => {
-    const savedUser = localStorage.getItem("user");
-    return savedUser ? JSON.parse(savedUser) : null;
+    const storedUser = localStorage.getItem("user");
+
+    return storedUser
+      ? JSON.parse(storedUser)
+      : null;
   });
 
-  const [loading, setLoading] = useState(true);
+  const [accessToken, setAccessToken] = useState(() =>
+    localStorage.getItem("access_token")
+  );
 
-  useEffect(() => {
-    setLoading(false);
-  }, []);
+  const login = (data) => {
+    localStorage.setItem("access_token", data.access);
+    localStorage.setItem("refresh_token", data.refresh);
 
-  const login = async (username, password) => {
-    const response = await loginUser({
-      username,
-      password,
-    });
+    /*
+     * Your backend login endpoint returns tokens,
+     * but it does not return the username.
+     *
+     * The username is therefore stored separately
+     * by Login.jsx.
+     */
+    if (data.user) {
+      localStorage.setItem(
+        "user",
+        JSON.stringify(data.user)
+      );
 
-    const { access, refresh } = response.data;
+      setUser(data.user);
+    }
 
-    localStorage.setItem("access_token", access);
-    localStorage.setItem("refresh_token", refresh);
-
-    const userData = { username };
-
-    localStorage.setItem("user", JSON.stringify(userData));
-    setUser(userData);
-
-    return response;
+    setAccessToken(data.access);
   };
 
   const logout = () => {
     localStorage.removeItem("access_token");
     localStorage.removeItem("refresh_token");
     localStorage.removeItem("user");
+
+    setAccessToken(null);
     setUser(null);
   };
 
@@ -45,10 +51,9 @@ export function AuthProvider({ children }) {
     <AuthContext.Provider
       value={{
         user,
-        loading,
+        accessToken,
         login,
         logout,
-        isAuthenticated: !!user,
       }}
     >
       {children}

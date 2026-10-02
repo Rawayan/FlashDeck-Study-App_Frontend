@@ -1,14 +1,8 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useAuth } from "../auth/AuthContext";
 
 function Navbar() {
-  const { user, isAuthenticated, logout } = useAuth();
-  const navigate = useNavigate();
-
-  const handleLogout = () => {
-    logout();
-    navigate("/login");
-  };
+  const { user, logout } = useAuth();
 
   return (
     <nav className="navbar">
@@ -17,16 +11,20 @@ function Navbar() {
           FlashDeck
         </Link>
 
-        {isAuthenticated && (
+        {user && (
           <div className="nav-links">
             <Link to="/">Dashboard</Link>
+
             <Link to="/decks">Decks</Link>
 
             <span className="username">
-              {user?.username}
+              {user.username}
             </span>
 
-            <button onClick={handleLogout}>
+            <button
+              type="button"
+              onClick={logout}
+            >
               Logout
             </button>
           </div>

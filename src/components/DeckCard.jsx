@@ -1,9 +1,8 @@
 import { Link } from "react-router-dom";
-import BoxBadge from "./BoxBadge";
 
 function DeckCard({ deck, onDelete }) {
   return (
-    <div className="deck-card">
+    <article className="deck-card">
       <div>
         <h3>{deck.title}</h3>
 
@@ -16,8 +15,13 @@ function DeckCard({ deck, onDelete }) {
         </small>
 
         <div className="deck-stats">
-          <span>{deck.card_count} cards</span>
-          <span>{deck.due_count} due</span>
+          <span>
+            {deck.card_count} cards
+          </span>
+
+          <span>
+            {deck.due_count} due
+          </span>
         </div>
       </div>
 
@@ -34,11 +38,14 @@ function DeckCard({ deck, onDelete }) {
           Study
         </Link>
 
-        <button onClick={() => onDelete(deck)}>
+        <button
+          type="button"
+          onClick={() => onDelete(deck)}
+        >
           Delete
         </button>
       </div>
-    </div>
+    </article>
   );
 }
 
