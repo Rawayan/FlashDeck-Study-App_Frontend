@@ -3,7 +3,7 @@
 FlashDeck is a spaced-repetition study application built with React and Vite.
 
 ## Live Link 
-- https://flashdeck-frontend-khaki.vercel.app/login
+- https://flashdeck-frontend-khaki.vercel.app
 
 ## Features
 
